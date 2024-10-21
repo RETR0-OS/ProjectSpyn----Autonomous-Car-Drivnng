@@ -1,6 +1,6 @@
-motorPorts = 'AB';
+motorPorts = 'AD';
 rightMotor = 'A';
-leftMotor = 'B';
+leftMotor = 'D';
 
 brickName = 'gp123';
 
