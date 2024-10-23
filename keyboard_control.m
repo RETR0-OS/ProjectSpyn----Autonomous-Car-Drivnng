@@ -5,7 +5,11 @@ leftMotor = 'D';
 brickName = 'gp123';
 brick = ConnectBrick(brickName);
 
-function main(brick)
+
+% worm motor definitions % 
+wormMotorPort = 'B';
+
+function manualControlDriver(brick)
     disp('Use W/A/S/D for movement, SPACE to stop, Q to quit.');
     
     while true
@@ -19,14 +23,10 @@ function main(brick)
                 manual_control(brick, key);  % Handle manual movement
             end
         else
-            % Automated movement forward, check for sensors
-            brick.MoveMotor(motorPorts, 90);
-            if brick.TouchPressed(1)
-                determine_turn(brick);
-            elseif brick.ColorCode(3) == 5  % Assuming sensor port 3 for color
-                brick.StopMotor(motorPorts, 'Coast');
-                pause(2);
-            end
+            
+            brick.StopMotor(motorPorts, 'Coast');
+            pause(2);
+            % switch to Automated movement
         end
     end
 end
@@ -35,37 +35,25 @@ function manual_control(brick, key)
     switch key
         case 'w'  % Move Forward
             disp('Moving Forward');
-            brick.MoveMotor(motorPorts, 50);
+            brick.MoveMotor(motorPorts, 70);
         case 's'  % Move Backward
             disp('Moving Backward');
-            brick.MoveMotor(motorPorts, -50);
+            brick.MoveMotor(motorPorts, -40);
         case 'a'  % Turn Left
             disp('Turning Left');
             turn_left(brick);
         case 'd'  % Turn Right
             disp('Turning Right');
             turn_right(brick);
+        case 'g' % Lower Lift
+            disp('Lowering Lift');
+        case 't'
+            disp('Raising Lift');
         case ' '  % Space key to stop
             disp('Stopping Motors');
             brick.StopMotor(motorPorts, 'Brake');
         otherwise
             disp('Invalid key. Use W/A/S/D/SPACE/Q');
-    end
-end
-
-function determine_turn(brick)
-    distance = brick.UltrasonicDist(4);  % Assuming sensor port 4 for Ultrasonic
-    if distance > 32
-        turn_left(brick);
-        return;
-    else
-        turn_around(brick);
-        if distance > 32
-           turn_right(brick);
-           return;
-        else
-            return;
-        end
     end
 end
 
@@ -87,4 +75,14 @@ function turn_right(brick)
     return;
 end
 
-main(brick);
+function lowerLift(brick)
+    brick.MoveMotor(wormMotorPort, -10);
+    return;
+end
+
+function raiseLift(brick)
+    brick.MoveMotor(wormMotorPort, 10)
+    return;
+end
+
+manualControlDriver(brick);
