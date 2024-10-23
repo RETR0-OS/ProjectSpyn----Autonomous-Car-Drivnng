@@ -1,3 +1,10 @@
+
+% motor definitions %
+motorPorts = 'AD';
+rightMotor = 'A';
+leftMotor = 'D';
+% end %
+
 motorPorts = 'AD';
 rightMotor = 'A';
 leftMotor = 'D';
@@ -6,19 +13,30 @@ brickName = 'gp123';
 
 brick = ConnectBrick(brickName);
 
-function main(brick)
+driveMode = true;
+
+function autonomousMovement(brick)
     while true
         % move forward
         brick.MoveMotor(motorPorts, 90);
         if (brick.TouchPressed(1))
             determine_turn(brick);
         elseif (brick.ColorCode(SensorPort) == 5)
+            % red stop line %
             brick.StopMotor(motorPorts, 'Coast');
             pause(2);
+        elseif (brick.ColorCode(SensorPort) == 2 || brick.ColorCode(SensorPort) == 3 || brick.ColorCode(SensorPort) == 4)
+            drop_off_zone(brick)
         end
     end
-
 end
+
+
+function drop_off_zone(brick)
+    brick.StopMotor(motorPorts, 'Coast');
+    driveMode = false;
+end
+
 
 function determine_turn(brick)
     distance = brick.UltrasonicDist(SensorPort);
@@ -54,4 +72,8 @@ function turn_right(brick)
     return
 end
 
+<<<<<<< HEAD
+autonomousMovement(brick);
+=======
 main(brick);
+>>>>>>> 3843ace5580c5fd54bd32d5d02c7a893fac46b7b
