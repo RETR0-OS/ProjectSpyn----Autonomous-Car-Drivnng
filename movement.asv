@@ -25,7 +25,7 @@ function autonomousMovement(brick)
             % red stop line %
             brick.StopMotor(motorPorts, 'Coast');
             pause(2);
-        elseif (brick.ColorCode('3') == 2 || brick.ColorCode('3') == 3 || brick.ColorCode('3') == 4)
+        elseif (brick.ColorCode('3') == 2 || brick.ColorCode('33') == 3 || brick.ColorCode('D') == 4)
             drop_off_zone(brick)
         end
     end
