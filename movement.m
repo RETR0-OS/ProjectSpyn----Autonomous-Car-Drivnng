@@ -4,13 +4,11 @@ motorPorts = 'AD';
 rightMotor = 'A';
 leftMotor = 'D';
 % end %
-<<<<<<< HEAD
 =======
 
 motorPorts = 'AD';
 rightMotor = 'A';
 leftMotor = 'D';
->>>>>>> 789075e13ce8ea6adb3566e7fc024cf9c05a7bc3
 
 brickName = 'gp123';
 
