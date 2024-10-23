@@ -47,8 +47,10 @@ function manual_control(brick, key)
             turn_right(brick);
         case 'g' % Lower Lift
             disp('Lowering Lift');
+            lower_lift(brick);
         case 't'
             disp('Raising Lift');
+            raise_lift(brick);
         case ' '  % Space key to stop
             disp('Stopping Motors');
             brick.StopMotor(motorPorts, 'Brake');
@@ -75,13 +77,13 @@ function turn_right(brick)
     return;
 end
 
-function lowerLift(brick)
+function lower_lift(brick)
     brick.MoveMotor(wormMotorPort, -10);
     return;
 end
 
-function raiseLift(brick)
-    brick.MoveMotor(wormMotorPort, 10)
+function raise_lift(brick)
+    brick.MoveMotor(wormMotorPort, 10);
     return;
 end
 
