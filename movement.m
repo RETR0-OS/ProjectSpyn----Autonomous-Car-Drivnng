@@ -4,7 +4,7 @@ motorPorts = 'AD';
 rightMotor = 'A';
 leftMotor = 'D';
 % end %
-=======
+
 
 motorPorts = 'AD';
 rightMotor = 'A';
@@ -73,12 +73,5 @@ function turn_right(brick)
     return
 end
 
-<<<<<<< HEAD
 autonomousMovement(brick);
-=======
-<<<<<<< HEAD
-autonomousMovement(brick);
-=======
-main(brick);
->>>>>>> 3843ace5580c5fd54bd32d5d02c7a893fac46b7b
->>>>>>> 789075e13ce8ea6adb3566e7fc024cf9c05a7bc3
+
