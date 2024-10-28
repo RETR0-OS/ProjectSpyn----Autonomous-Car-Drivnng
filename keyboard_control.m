@@ -1,74 +1,82 @@
+global rightMotor
+global leftMotor
+global motorPorts
+global brick
+global brickName
+global wormMotorPort
 motorPorts = 'AD';
 rightMotor = 'A';
 leftMotor = 'D';
 
 brickName = 'gp123';
 brick = ConnectBrick(brickName);
+global key
 
 
 % worm motor definitions % 
 wormMotorPort = 'B';
 
 %open keyboard%
-InitKeyboard()
+InitKeyboard();
 
-function manualControlDriver(brick)
-    disp('Use W/A/S/D for movement, SPACE to stop, Q to quit.');s
-    while true
-        switch key
-            case 'w'  % Move Forward
-                disp('Moving Forward');
-                brick.MoveMotor(motorPorts, -70);
-                break;
-            case 's'  % Move Backward
-                disp('Moving Backward');
-                brick.MoveMotor(motorPorts, 40);
-                break;
-            case 'a'  % Turn Left
-                disp('Turning Left');
-                turn_left(brick);
-                break;
-            case 'd'  % Turn Right
-                disp('Turning Right');
-                turn_right(brick);
-                break;
-            case 'g' % Lower Lift
-                disp('Lowering Lift');
-                lower_lift(brick);
-                break;
-            case 't'
-                disp('Raising Lift');
-                raise_lift(brick);
-                break;
-            otherwise
-                brick.StopAllMotors('brake');
-        end
+disp('Use W/A/S/D for movement, SPACE to stop, Q to quit.');
+while true
+    pause(0.1);
+    disp(key)
+    switch key
+        case 'w'  % Move Forward
+            disp('Moving Forward');
+            brick.MoveMotor(motorPorts, -70);
 
+        case 's'  % Move Backward
+            disp('Moving Backward');
+            brick.MoveMotor(motorPorts, 40);
+        case 'a'  % Turn Left
+            disp('Turning Left');
+            turn_left(brick, rightMotor, leftMotor);
+
+        case 'd'  % Turn Right
+            disp('Turning Right');
+            turn_right(brick, rightMotor, leftMotor);
+
+        case 'g' % Lower Lift
+            disp('Lowering Lift');
+            lower_lift(brick, wormMotorPort);
+
+        case 't'
+            disp('Raising Lift');
+            raise_lift(brick, wormMotorPort);
+        case ' '
+            disp('stop');
+            brick.StopAllMotors('Coast');
+        otherwise
+            brick.StopAllMotors('Coast');
     end
-end
 
-function turn_left(brick)
-    brick.MoveMotorAngleRel(rightMotor, -50, 180, 'Coast');
-    brick.MoveMotorAngleRel(leftMotor, -50, -180, 'Coast');
+end
+CloseKeyboard();
+
+
+function turn_left(brick, rightMotor, leftMotor)
+    brick.MoveMotor(rightMotor, 20);
+    brick.MoveMotor(leftMotor, -20);
     return;
 end
 
-function turn_right(brick)
-    brick.MoveMotorAngleRel(rightMotor, -50, -360, 'Coast');
-    brick.MoveMotorAngleRel(leftMotor, -50, 360, 'Coast');
+function turn_right(brick, rightMotor, leftMotor)
+    brick.MoveMotor(rightMotor, -20);
+    brick.MoveMotor(leftMotor, 20);
     return;
 end
 
-function lower_lift(brick)
+function lower_lift(brick, wormMotorPort)
     %FIXME: Verify worm motor orientation %
     brick.MoveMotor(wormMotorPort, -10);
     return;
 end
 
-function raise_lift(brick)
+function raise_lift(brick, wormMotorPort)
     %FIXME: Verify worm motor orientation %
     brick.MoveMotor(wormMotorPort, 10);
     return;
 end
-
-manualControlDriver(brick);
