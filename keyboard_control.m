@@ -22,7 +22,6 @@ InitKeyboard();
 disp('Use W/A/S/D for movement, SPACE to stop, Q to quit.');
 while true
     pause(0.1);
-    disp(key)
     switch key
         case 'w'  % Move Forward
             disp('Moving Forward');
@@ -46,9 +45,10 @@ while true
         case 't'
             disp('Raising Lift');
             raise_lift(brick, wormMotorPort);
-        case ' '
+        case 'q'
             disp('stop');
             brick.StopAllMotors('Coast');
+            % switch to auto %
         otherwise
             brick.StopAllMotors('Coast');
     end
