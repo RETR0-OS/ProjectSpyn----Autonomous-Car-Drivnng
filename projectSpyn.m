@@ -80,11 +80,11 @@ while true
       end
   end
   
-  if !driveMode:
+  if not(driveMode)
     disp('Use W/A/S/D for movement, SPACE to stop, Q to quit.');
   end
   
-  while !driveMode
+  while not(driveMode)
       InitKeyboard();
       pause(0.1);
       switch key
