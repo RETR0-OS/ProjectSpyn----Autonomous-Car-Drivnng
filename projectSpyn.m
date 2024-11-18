@@ -97,11 +97,11 @@ while true
               brick.MoveMotor(motorPorts, 40);
           case 'a'  % Turn Left
               disp('Turning Left');
-              turn_left(brick, rightMotor, leftMotor);
+              turn_left_keyboard(brick, rightMotor, leftMotor);
   
           case 'd'  % Turn Right
               disp('Turning Right');
-              turn_right(brick, rightMotor, leftMotor);
+              turn_right_keyboard(brick, rightMotor, leftMotor);
   
           case 'g' % Lower Lift
               disp('Lowering Lift');
@@ -177,3 +177,26 @@ function turn_right(brick, rightMotor, leftMotor)
     brick.WaitForMotor(leftMotor);
 end
 
+function turn_left_keyboard(brick, rightMotor, leftMotor)
+    brick.MoveMotor(rightMotor, 20);
+    brick.MoveMotor(leftMotor, -20);
+    return;
+end
+
+function turn_right_keyboard(brick, rightMotor, leftMotor)
+    brick.MoveMotor(rightMotor, -20);
+    brick.MoveMotor(leftMotor, 20);
+    return;
+end
+
+function lower_lift(brick, wormMotorPort)
+    %FIXME: Verify worm motor orientation %
+    brick.MoveMotor(wormMotorPort, -10);
+    return;
+end
+
+function raise_lift(brick, wormMotorPort)
+    %FIXME: Verify worm motor orientation %
+    brick.MoveMotor(wormMotorPort, 10);
+    return;
+end
