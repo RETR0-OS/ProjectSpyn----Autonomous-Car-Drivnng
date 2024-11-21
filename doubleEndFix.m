@@ -48,7 +48,6 @@ pickup = 3;
 picked_up = false;
 % end %
 
-% 
 
 while true
   while driveMode
@@ -172,13 +171,10 @@ while true
   end
 end
 
-
-
 function drop_off_zone(brick, motorPorts)
     brick.StopMotor(motorPorts, 'Coast');
     return;
 end
-
 
 function determine_turn(brick, SensorPort, rightMotor, leftMotor)
     brick.ResetMotorAngle(rightMotor);
