@@ -1,6 +1,6 @@
 # ProjectSpyn
 
-ProjectSpyn is a robotics control system implemented in MATLAB for interacting with LEGO Mindstorms EV3. Project Spyn is a inclusivity project designed to improve mobility for speacially-abled people by providing personalized autonomous transportation over the city.
+ProjectSpyn is a robotics control system implemented in MATLAB for interacting with LEGO Mindstorms EV3. Project Spyn is a inclusivity project designed to improve mobility for speacially-abled people by providing personalized autonomous transportation over the city (maze).
 
 ## Features
 
@@ -34,7 +34,7 @@ ProjectSpyn is a robotics control system implemented in MATLAB for interacting w
 
 1. Set the pickup and dropoff locations in ProjectSpyn.m.
 2. Run `ProjetSpyn.m` in MATLAB.
-3. The robot navigates the maze autonomously to go to the pickup location and dropoff locations.
+3. The robot navigates the maze autonomously to go to the pickup location and dropoff locations (Blue, Green, or Yellow).
 4. At the pickup and dropoff locations, use the following keys for control:
    - `w`: Move forward
    - `s`: Move backward
